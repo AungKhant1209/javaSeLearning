@@ -4,7 +4,7 @@ public class ex1 {
     public static void main(String[] args) {
         System.out.println("While Loop");
         int x=1;
-
+//In am restin for fgit
         while (x<11){
             int result=2*x;
             System.out.println("2 x "+x+" = "+result);
