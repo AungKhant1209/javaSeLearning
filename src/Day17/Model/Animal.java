@@ -1,5 +1,6 @@
 package Day17.Model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Animal {
@@ -63,6 +64,7 @@ public class Animal {
     }
 
     public Date getBirthDate() {
+
         return birthDate;
     }
 

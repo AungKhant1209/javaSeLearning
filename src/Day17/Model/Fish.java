@@ -1,9 +1,11 @@
 package Day17.Model;
 
+import java.util.Date;
+
 public class Fish extends Animal{
-    public Fish(String name, int age, String sex, String color ){
+    public Fish(String name, Date dob, String sex, String color,int age ){
         this.setName(name);
-        this.setAge(age);
+        this.setBirthDate(dob);
         this.setSex(sex);
         this.setColor(color);
 

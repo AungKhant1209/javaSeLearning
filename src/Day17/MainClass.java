@@ -8,13 +8,7 @@ import Day17.Service.TigerService;
 import java.text.ParseException;
 import java.util.Scanner;
 
-import static Day17.Service.BirdService.birds;
-//private StudentService studentService;
-//private TeacherService teacherService;
-//public MainApp() {
-//    this.studentService = new StudentService();
-//    this.teacherService = new TeacherService();
-//}
+
 public class MainClass {
     public static Scanner scanner = new Scanner(System.in);
     private BirdService birdService;

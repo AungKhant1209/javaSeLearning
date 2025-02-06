@@ -17,10 +17,12 @@ public class BirdService {
     public void birdServiceManagement() throws ParseException {
         boolean flag = true;
         do{
-            System.out.println("Choose type of servie for bird:");
+            System.out.println("Choose type of service for bird:");
             System.out.println("1 for registeration:");
             System.out.println("2 for display:");
-            System.out.println("3 for back to the menu:");
+            System.out.println("3 for deleting bird:");
+            System.out.println("4 for updating bird:");
+            System.out.println("5 for back:");
             String choice=scanner.nextLine();
             switch(choice){
                 case "1":
@@ -30,6 +32,12 @@ public class BirdService {
                     displayBirdList();
                     break;
                 case "3":
+                    birdDelete();
+                    break;
+                case "4":
+                    birdsUpdate();
+                    break;
+                case "5":
                     System.out.println("This is menu------>");
                     flag=false;
                     break;
@@ -84,6 +92,9 @@ public class BirdService {
             System.out.println(bird.getSex());
             System.out.println(bird.getSpecies());
             System.out.println(bird.getAge());
+            SimpleDateFormat ft = new SimpleDateFormat("dd-MM-yyyy");
+            System.out.println(ft.format(bird.getBirthDate()));
+            ;
         }
 
     }
@@ -101,21 +112,32 @@ public class BirdService {
         int ageYear= (int) (((currentDate.getTime()-dob.getTime())/(1000*60*60*24))/365);
         return ageYear;
     }
-//    public static void deleteProcess(int deleteIndex){
-//        while(birds[deleteIndex+1]!=null){
-//            birds[deleteIndex]=birds[deleteIndex+1];
-//            deleteIndex++;
-//        }
-//        birds
-//    }
-    //public static void deleteProcess(int deleteIndex) {
-//    while(students[deleteIndex+1] != null) {
-//        students[deleteIndex]=students[deleteIndex+1];
-//        deleteIndex++;
-//    }
-//    students[deleteIndex]=null;
-//    index--;
-//
+    public static void deleteProcess(int deleteIndex){
+        while(birds[deleteIndex+1]!=null){
+            birds[deleteIndex]=birds[deleteIndex+1];
+            deleteIndex++;
+        }
+        birds[deleteIndex]=null;
+        totalBirds--;
+    }
+    public static void birdsUpdate() throws ParseException {
+        System.out.println("Insert the name of the bird: ");
+        String searchName = scanner.nextLine();
+        int indexUpdate=searchBird(searchName);
+        Bird bird = getInformation();
+        birds[indexUpdate] = bird;
+    }
+    public static void birdDelete(){
+        System.out.println("Delete the bird: ");
+        String deleteName= scanner.nextLine();
+        int indexUpdate = searchBird(deleteName);
+        deleteProcess(indexUpdate);
+    }
+    //public static void studentDelete() {
+//    System.out.println("Delete the student: ");
+//    String deleteName = scanner.nextLine();
+//    int indexUpdate = searchStudent(deleteName);
+//    deleteProcess(indexUpdate);
 //}
 
 }

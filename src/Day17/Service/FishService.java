@@ -1,8 +1,12 @@
 package Day17.Service;
 
 
+import Day17.Model.Bird;
 import Day17.Model.Fish;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 public class FishService {
@@ -10,7 +14,7 @@ public class FishService {
     public static final int max_fish = 10000;
     public static Fish[] fishy = new Fish[max_fish];
     public static Scanner scanner = new Scanner(System.in);
-    public void fishServiceManagement(){
+    public void fishServiceManagement() throws ParseException {
         boolean flag = true;
         do{
             System.out.println("Choose type of service for fish:");
@@ -36,22 +40,27 @@ public class FishService {
         }while(flag);
     }
 
-    public static Fish getInformation(){
+    public static Fish getInformation() throws ParseException {
         System.out.println("enter Fish's name:");
         String name = scanner.nextLine();
-        System.out.println("enter Fish's age:");
-        int age = scanner.nextInt();scanner.nextLine();
+        System.out.println("enter Fish's date (dd/mm/yyyy):");
+        String dobString = scanner.nextLine();
+        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("dd/MM/yyyy");
+        Date dob=simpleDateFormat.parse(dobString);
         System.out.println("enter Fish's species:");
         String species = scanner.nextLine();
         System.out.println("enter Fish's color:");
         String color = scanner.nextLine();
         System.out.println("enter Fish's sex:");
         String sex = scanner.nextLine();
-        Fish fish=new Fish(name,age,sex,color);
+        int age=ageCalculator(dob);
+        System.out.println("age=="+age);
+        Fish fish=new Fish(name,dob,sex,color,age);
+
         return fish;
     }
 
-    public static void registerFish(){
+    public static void registerFish() throws ParseException {
         String choice="";
         do{
             Fish fish=getInformation();
@@ -62,11 +71,25 @@ public class FishService {
         }while(choice.equals("yes"));
 
     }
+    public static int ageCalculator(Date dob){
+        Date currentDate=new Date();
+        int ageYear= (int) (((currentDate.getTime()-dob.getTime())/(1000*60*60*24))/365);
+        return ageYear;
+    }
 //    System.out.println("!!....Display All Teachers....!! ");
 //        for (int i = 0; i < Teacher.getTotalTeacherCount(); i++) {
 //        Teacher teacher = Teacher.getTeachers()[i];
 //        System.out.println(teacher);
 //    }
+public static int searchTFish(String animalName) {
+    for (int i = 0; i < fishy.length; i++) {
+        if (fishy[i].getName().equals(animalName)) {
+            return i;
+        }
+
+    }
+    return -1;
+}
 
 
     public static void displayFishList(){
