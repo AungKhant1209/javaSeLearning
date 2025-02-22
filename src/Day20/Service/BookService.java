@@ -1,6 +1,5 @@
 package Day20.Service;
 
-import Day17.Model.Bird;
 import Day20.Model.Book;
 
 import java.text.ParseException;
@@ -10,14 +9,14 @@ import java.util.Scanner;
 
 
 
-public class Service {
+public class BookService {
     public static Book[] books=new Book[1000];
     public static int numberofBooks=0;
     public static Scanner scanner = new Scanner(System.in);
 
 
 
-    public Service() {
+    public BookService() {
     }
 
     public static Date convertToDate(String dateStr){
@@ -51,7 +50,7 @@ public class Service {
         System.out.println("Enter email:");
         String email=scanner.nextLine();
         Date date=enterDateData();
-        System.out.println("Enter rent:");
+        System.out.println("Enter rent fees:");
         int rent=scanner.nextInt();scanner.nextLine();
         Book book=new Book(name,author,quantity,email,date,rent);
         return book;
@@ -90,8 +89,5 @@ public class Service {
             System.out.println(books[i]);
         }
     }
-    public static void main(String[] args){
-        bookRegister();
-        display();
-    }
+
 }

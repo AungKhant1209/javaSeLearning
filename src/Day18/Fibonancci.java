@@ -11,7 +11,7 @@ public class Fibonancci {
         }
     }
     public static void main(String[]args){
-        System.out.println("Fibonancci of 4 is "+fibonancci(4));
+        System.out.println("Fibonancci of 4 is "+fibonancci(2));
     }
 }
 //1,2,4,8,16,17,9,18,19,5,10,20,11,3,6,12,13,7,14,15
