@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="481.0" prefWidth="966.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.javafxlearning.RegisterController">
+   <children>
+      <VBox layoutX="14.0" layoutY="109.0" prefHeight="217.0" prefWidth="196.0" spacing="20.0">
+         <children>
+            <Label text="Name" />
+            <TextField fx:id="modelTextField" />
+            <Label text="Model" />
+            <TextField fx:id="licenseTextField" />
+            <Label text="Type" />
+            <ChoiceBox fx:id="typeTextBox" prefHeight="21.0" prefWidth="197.0" />
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#onRegisterClicked" prefHeight="26.0" prefWidth="98.0" text="Register">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Button>
+                  <Button mnemonicParsing="false" prefHeight="29.0" prefWidth="98.0" text="Cancel">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Button>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <Label layoutX="312.0" layoutY="28.0" prefHeight="22.0" prefWidth="340.0" text="Welcome to Vehicle Registeration System">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <TableView fx:id="vehicleDataTable" layoutX="241.0" layoutY="85.0" prefHeight="323.0" prefWidth="635.0">
+        <columns>
+          <TableColumn fx:id="nameColumn" minWidth="50.0" prefWidth="171.0" text="Name" />
+            <TableColumn fx:id="typeColumn" minWidth="50.0" prefWidth="115.0" text="Type" />
+            <TableColumn fx:id="modelColumn" maxWidth="1.7976931348623157E308" prefWidth="144.0" text="Model" />
+            <TableColumn fx:id="licenseColumn" prefWidth="204.0" text="Licen" />
+        </columns>
+      </TableView>
+      <TextField fx:id="nameTextField" layoutX="680.0" layoutY="50.0" />
+      <Label layoutX="609.0" layoutY="55.0" text="Search" />
+   </children>
+</AnchorPane>
