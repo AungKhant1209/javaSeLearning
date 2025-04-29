@@ -9,8 +9,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.cell.PropertyValueFactory;
+import org.example.javafxlearning.Dao.OwnerDao;
 import org.example.javafxlearning.Dao.VehicleDao;
 import org.example.javafxlearning.Dao.VehicleTypeDao;
+import org.example.javafxlearning.model.Owner;
 import org.example.javafxlearning.model.Vehicle;
 import org.example.javafxlearning.model.VehicleType;
 
@@ -26,7 +28,13 @@ public class RegisterController {
     @FXML
     private TextField licenseTextField;
     @FXML
-    private ChoiceBox<String> typeTextBox;
+    private TextField pricePerDayTextField;
+    @FXML
+    private TextField passengerNumTextField;
+    @FXML
+    private ChoiceBox<String> vehicleTypeChoiceBox;
+    @FXML
+    private ChoiceBox<String> ownerChoiceBox;
     @FXML
     private TableView<Vehicle> vehicleDataTable;
     @FXML
@@ -44,16 +52,28 @@ public class RegisterController {
     private static List<Vehicle> vehicles = new ArrayList<Vehicle>();
     public VehicleDao vehicleDao;
     private VehicleTypeDao vehicleTypeDao;
+    private OwnerDao ownerDao;
 
     @FXML
     protected void initialize() {
         vehicleDao = new VehicleDao();
         vehicleTypeDao = new VehicleTypeDao();
+        ownerDao = new OwnerDao();
+
+        //prepare for vehicle type choice box
         List<VehicleType> vehicleTypes=vehicleTypeDao.getVehicleTypes();
+        vehicleTypeChoiceBox.setValue(vehicleTypes.getFirst().getName());
         for(VehicleType vehicleType:vehicleTypes){
-            typeTextBox.getItems().add(vehicleType.getName());
+            vehicleTypeChoiceBox.getItems().add(vehicleType.getName());
         }
-        typeTextBox.setValue("car");
+
+        //prepare for owner choice box
+        List<Owner> owners=ownerDao.getOwners();
+        ownerChoiceBox.setValue(owners.getFirst().getName());
+        for(Owner owner:owners){
+            ownerChoiceBox.getItems().add(owner.getName());
+        }
+
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         licenseColumn.setCellValueFactory(new PropertyValueFactory<>("license"));
         modelColumn.setCellValueFactory(new PropertyValueFactory<>("model"));
@@ -68,8 +88,17 @@ public class RegisterController {
         String name = nameTextField.getText();
         String model = modelTextField.getText();
         String license = licenseTextField.getText();
-        String type = typeTextBox.getValue();
-        Vehicle newVehicle = new Vehicle(name, model, license, null);
+        Double  price = Double.parseDouble(pricePerDayTextField.getText());
+        int passengers = Integer.parseInt(passengerNumTextField.getText());
+
+
+        String typeName = vehicleTypeChoiceBox.getValue();
+        VehicleType vehicleType=vehicleTypeDao.getVehicleTypeByName(typeName);
+
+        Vehicle newVehicle = new Vehicle(name, model, license, vehicleType);
+        newVehicle.setPriceParDay(price);
+        newVehicle.setMaxPassengers(passengers);
+
         vehicles.add(newVehicle);
         vehicleObservableList.add(newVehicle);
         vehicleDataTable.setItems(vehicleObservableList);

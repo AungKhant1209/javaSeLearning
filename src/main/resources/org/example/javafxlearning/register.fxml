@@ -4,16 +4,24 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="481.0" prefWidth="966.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.javafxlearning.RegisterController">
+<AnchorPane prefHeight="688.0" prefWidth="1315.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.javafxlearning.RegisterController">
    <children>
-      <VBox layoutX="14.0" layoutY="109.0" prefHeight="217.0" prefWidth="196.0" spacing="20.0">
+      <VBox layoutX="14.0" layoutY="109.0" prefHeight="217.0" prefWidth="196.0" spacing="10.0">
          <children>
             <Label text="Name" />
-            <TextField fx:id="modelTextField" />
+            <TextField fx:id="nameTextField" />
+            <Label text="License" />
+            <TextField fx:id="licenseTextField"/>
+            <Label text="Passenger Number" />
+            <TextField fx:id="passengerNumTextField"/>
+            <Label text="Price Per Day" />
+            <TextField fx:id="pricePerDayTextField"/>
             <Label text="Model" />
-            <TextField fx:id="licenseTextField" />
+            <TextField fx:id="modelTextField" />
             <Label text="Type" />
-            <ChoiceBox fx:id="typeTextBox" prefHeight="21.0" prefWidth="197.0" />
+            <ChoiceBox fx:id="vehicleTypeChoiceBox" prefHeight="21.0" prefWidth="197.0" />
+            <Label text="Customer" />
+            <ChoiceBox fx:id="ownerChoiceBox" prefHeight="24.0" prefWidth="198.0" />
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Button mnemonicParsing="false" onAction="#onRegisterClicked" prefHeight="26.0" prefWidth="98.0" text="Register">
@@ -28,20 +36,24 @@
             </HBox>
          </children>
       </VBox>
-      <Label layoutX="312.0" layoutY="28.0" prefHeight="22.0" prefWidth="340.0" text="Welcome to Vehicle Registeration System">
+      <Label layoutX="526.0" layoutY="34.0" prefHeight="22.0" prefWidth="340.0" text="Welcome to Vehicle Registeration System">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <TableView fx:id="vehicleDataTable" layoutX="241.0" layoutY="85.0" prefHeight="323.0" prefWidth="635.0">
+      <TableView fx:id="vehicleDataTable" layoutX="250.0" layoutY="135.0" prefHeight="528.0" prefWidth="1002.0">
         <columns>
-          <TableColumn fx:id="nameColumn" minWidth="50.0" prefWidth="171.0" text="Name" />
-            <TableColumn fx:id="typeColumn" minWidth="50.0" prefWidth="115.0" text="Type" />
-            <TableColumn fx:id="modelColumn" maxWidth="1.7976931348623157E308" prefWidth="144.0" text="Model" />
-            <TableColumn fx:id="licenseColumn" prefWidth="204.0" text="Licen" />
+          <TableColumn fx:id="nameColumn" minWidth="50.0" prefWidth="126.0" text="Name" />
+            <TableColumn fx:id="typeColumn" minWidth="50.0" prefWidth="119.0" text="Type" />
+            <TableColumn fx:id="modelColumn" maxWidth="1.7976931348623157E308" prefWidth="120.0" text="Model" />
+            <TableColumn fx:id="licenseColumn" prefWidth="127.0" text="License" />
+            <TableColumn prefWidth="112.0" text="Price Per Day" />
+            <TableColumn prefWidth="142.0" text="Owner Name" />
+            <TableColumn prefWidth="140.0" text="Passenger Number" />
+            <TableColumn prefWidth="115.0" text="Address" />
         </columns>
       </TableView>
-      <TextField fx:id="nameTextField" layoutX="680.0" layoutY="50.0" />
-      <Label layoutX="609.0" layoutY="55.0" text="Search" />
+      <Label layoutX="1039.0" layoutY="101.0" text="Search" />
+      <TextField layoutX="15.0" layoutY="-34.0" />
    </children>
 </AnchorPane>

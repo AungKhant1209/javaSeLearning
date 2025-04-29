@@ -51,5 +51,26 @@ public class VehicleTypeDao {
         }
         return vehicleTypes;
     }
+    public VehicleType getVehicleTypeByName(String name) {
+        Connection con = DatabaseConnection.getConnection();
+        String query = "SELECT * FROM vehicle_types WHERE name = ?";
+        VehicleType vehicleType = null;
+        try{
+            PreparedStatement ps = con.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                vehicleType=new VehicleType(
+                        rs.getInt("id"),
+                        rs.getString("code"),
+                        rs.getString("name")
+                );
+            }
+
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return vehicleType;
+    }
 
 }

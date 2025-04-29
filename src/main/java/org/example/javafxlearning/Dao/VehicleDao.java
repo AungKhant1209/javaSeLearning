@@ -12,14 +12,18 @@ import java.util.List;
 public class VehicleDao {
     public Boolean addVehicle(Vehicle vehicle) {
         Connection con = DatabaseConnection.getConnection();
-        String query = "INSERT INTO vehicles (name, model, license, type_id) VALUES (?,?,?,?)";
+        String query = "INSERT INTO vehicles(name, model, license, type_id,owner_id,maxPassengers,priceParDay) VALUES (?,?,?,?,?,?,?)";
 
         try {
             PreparedStatement ps = con.prepareStatement(query);
             ps.setString(1, vehicle.getName());
             ps.setString(2, vehicle.getModel());
             ps.setString(3, vehicle.getLicense());
-            ps.setInt(4,1);
+            ps.setInt(4,vehicle.getVehicleType().getId());
+            ps.setInt(5,vehicle.getOwner().getId());
+            ps.setInt(6,vehicle.getMaxPassengers());
+            ps.setDouble(7,vehicle.getPriceParDay());
+
 
             int rows = ps.executeUpdate();
             if (rows > 0) {
