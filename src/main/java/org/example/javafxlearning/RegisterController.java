@@ -45,6 +45,15 @@ public class RegisterController {
     private TableColumn<Vehicle, String> modelColumn;
     @FXML
     private TableColumn<Vehicle, String> typeColumn;
+    @FXML
+    private TableColumn<Vehicle, Integer> pricePerDayColumn;
+    @FXML
+    private TableColumn<Vehicle, String> ownerColumn;
+    @FXML
+    private TableColumn<Vehicle, String> passengerColumn;
+    @FXML
+    private TableColumn<Vehicle, String> addressColumn;
+
 
     @FXML
     private ObservableList<Vehicle> vehicleObservableList = FXCollections.observableArrayList();
@@ -60,14 +69,12 @@ public class RegisterController {
         vehicleTypeDao = new VehicleTypeDao();
         ownerDao = new OwnerDao();
 
-        //prepare for vehicle type choice box
         List<VehicleType> vehicleTypes=vehicleTypeDao.getVehicleTypes();
         vehicleTypeChoiceBox.setValue(vehicleTypes.getFirst().getName());
         for(VehicleType vehicleType:vehicleTypes){
             vehicleTypeChoiceBox.getItems().add(vehicleType.getName());
         }
 
-        //prepare for owner choice box
         List<Owner> owners=ownerDao.getOwners();
         ownerChoiceBox.setValue(owners.getFirst().getName());
         for(Owner owner:owners){
@@ -78,6 +85,10 @@ public class RegisterController {
         licenseColumn.setCellValueFactory(new PropertyValueFactory<>("license"));
         modelColumn.setCellValueFactory(new PropertyValueFactory<>("model"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<>("typeName"));
+        pricePerDayColumn.setCellValueFactory(new PropertyValueFactory<>("pricePerDay"));
+        ownerColumn.setCellValueFactory(new PropertyValueFactory<>("ownerName"));
+        passengerColumn.setCellValueFactory(new PropertyValueFactory<>("maxPassengers"));
+        addressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
         vehicleObservableList.addAll(vehicles);
         vehicleDataTable.setItems(vehicleObservableList);
         vehicleObservableList.addAll(vehicleDao.getVehicles());
@@ -85,25 +96,32 @@ public class RegisterController {
     }
     @FXML
     protected void onRegisterClicked() {
-        String name = nameTextField.getText();
-        String model = modelTextField.getText();
-        String license = licenseTextField.getText();
-        Double  price = Double.parseDouble(pricePerDayTextField.getText());
-        int passengers = Integer.parseInt(passengerNumTextField.getText());
+        try {
+            String name = nameTextField.getText();
+            String model = modelTextField.getText();
+            String license = licenseTextField.getText();
+            double pricePerDay = Double.parseDouble(pricePerDayTextField.getText());
+            int maxPassengers = Integer.parseInt(passengerNumTextField.getText());
 
+            String typeName = vehicleTypeChoiceBox.getValue();
+            String ownerName = ownerChoiceBox.getValue();
+            System.out.println("typeName--> " + typeName);
+            System.out.println("ownerName--> " + ownerName);
+            VehicleType vehicleType = vehicleTypeDao.getVehicleTypeByName(typeName);
+            System.out.println("Vehicle Type: "+vehicleType);
+            Owner owner = ownerDao.getOwnerByName(ownerName);
 
-        String typeName = vehicleTypeChoiceBox.getValue();
-        VehicleType vehicleType=vehicleTypeDao.getVehicleTypeByName(typeName);
+            Vehicle newVehicle = new Vehicle(name, model, license, maxPassengers, pricePerDay, owner, vehicleType);
+            System.out.println("Vehicle : "+newVehicle);
+            System.out.println("owner : "+owner);
+            vehicles.add(newVehicle);
+            vehicleObservableList.add(newVehicle);
+            vehicleDataTable.setItems(vehicleObservableList);
+            vehicleDao.addVehicle(newVehicle);
 
-        Vehicle newVehicle = new Vehicle(name, model, license, vehicleType);
-        newVehicle.setPriceParDay(price);
-        newVehicle.setMaxPassengers(passengers);
-
-        vehicles.add(newVehicle);
-        vehicleObservableList.add(newVehicle);
-        vehicleDataTable.setItems(vehicleObservableList);
-        vehicleDao.addVehicle(newVehicle);
-        System.out.println("On Register Button Click");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

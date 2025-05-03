@@ -12,7 +12,7 @@ import java.util.List;
 public class OwnerDao {
     public Boolean addOwner(Owner owner) {
         Connection con = DatabaseConnection.getConnection();
-        String query = "INSERT INTO owners(name,age,email,phone,passport,address ) VALUES (?,?,?,?,?,?)";
+        String query = "INSERT INTO owners(name,age,email, phone,passport,address ) VALUES (?,?,?,?,?,?)";
 
         try {
             PreparedStatement ps = con.prepareStatement(query);
@@ -60,5 +60,29 @@ public class OwnerDao {
         }
         return owners;
     }
+    public Owner getOwnerByName(String name) {
+        Connection con = DatabaseConnection.getConnection();
+        String query = "SELECT * FROM owners WHERE name = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1, name);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return new Owner(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getInt("age"),
+                        rs.getString("email"),
+                        rs.getString("phone"),
+                        rs.getString("passport"),
+                        rs.getString("address")
+                );
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null; // if not found
+    }
+
 
 }

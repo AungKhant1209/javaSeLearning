@@ -5,7 +5,7 @@ public class Vehicle {
     private String model;
     private String license;
     private int maxPassengers;
-    private double priceParDay;
+    private double pricePerDay;
     private Owner owner;
 
     private VehicleType vehicleType;
@@ -17,12 +17,12 @@ public class Vehicle {
         this.vehicleType = vehicleType;
     }
 
-    public Vehicle(String name, String model, String license, int maxPassengers, double priceParDay, Owner owner, VehicleType vehicleType) {
+    public Vehicle(String name, String model, String license, int maxPassengers, double pricePerDay, Owner owner, VehicleType vehicleType) {
         this.name = name;
         this.model = model;
         this.license = license;
         this.maxPassengers = maxPassengers;
-        this.priceParDay = priceParDay;
+        this.pricePerDay = pricePerDay;
         this.owner = owner;
         this.vehicleType = vehicleType;
     }
@@ -34,6 +34,13 @@ public class Vehicle {
 
     public String getTypeName(){
         return vehicleType.getName();
+    }
+
+    public String getAddress() {
+        return owner.getAddress();
+    }
+    public String getOwnerName() {
+        return owner.getName();
     }
 
     public void setName(String name) {
@@ -72,12 +79,12 @@ public class Vehicle {
         this.maxPassengers = maxPassengers;
     }
 
-    public double getPriceParDay() {
-        return priceParDay;
+    public double getPricePerDay() {
+        return pricePerDay;
     }
 
-    public void setPriceParDay(double priceParDay) {
-        this.priceParDay = priceParDay;
+    public void setPricePerDay(double pricePerDay) {
+        this.pricePerDay = pricePerDay;
     }
 
     public Owner getOwner() {
@@ -95,7 +102,7 @@ public class Vehicle {
                 ", model='" + model + '\'' +
                 ", license='" + license + '\'' +
                 ", maxPassengers=" + maxPassengers +
-                ", priceParDay=" + priceParDay +
+                ", priceParDay=" + pricePerDay +
                 ", owner=" + owner +
                 ", vehicleType=" + vehicleType +
                 '}';

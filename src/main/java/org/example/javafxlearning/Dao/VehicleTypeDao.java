@@ -54,9 +54,11 @@ public class VehicleTypeDao {
     public VehicleType getVehicleTypeByName(String name) {
         Connection con = DatabaseConnection.getConnection();
         String query = "SELECT * FROM vehicle_types WHERE name = ?";
+
         VehicleType vehicleType = null;
         try{
             PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1, name);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 vehicleType=new VehicleType(
